@@ -1,0 +1,45 @@
+body {
+  font-family: DynaPuff, Arial, sans-serif;
+  color: #ffffff;
+  background-color: #2d0e5b;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+.entering-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+.kahoot-entering-page-logo {
+  width: 15em;
+}
+.player-entrance {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 6px;
+  margin-top: 2em;
+  width: 20em;
+  height: 8em;
+}
+.player-entrance textarea {
+  width: 85%;
+  height: 35%;
+  border: 2px solid #cccccc;
+  border-radius: 12px;
+}
+.player-entrance button {
+  font-family: DynaPuff, Arial, sans-serif;
+  width: 85%;
+  height: 45%;
+  background-color: #333333;
+  color: #ffffff;
+  border: 2px solid #cccccc;
+  border-radius: 12px;
+  font-size: 1em;
+}
