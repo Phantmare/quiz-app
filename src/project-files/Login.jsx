@@ -21,52 +21,51 @@ export default function LoginPage() {
     setErrorMessage('')
 
     signInWithEmailAndPassword(auth, playerName, password)
-      .then(async function () {
+      .then(function() {
         const user = auth.currentUser
         if (user) {
           const userDocId = user.uid
-          const q = query(collection(db, 'quiz-app-data'), where('userId', '==', userDocId))
-          const querySnapshot = await getDocs(q)
-
-          if (!querySnapshot.empty) {
-            const userDoc = querySnapshot.docs[0]
-            const userData = userDoc.data()
-            const currentLevel = userData.currentLevel
-
-            const continueFromLevel = window.confirm(`Your last saved level is ${currentLevel}. Do you want to continue from there?`)
-
-            if (continueFromLevel) {
-              navigate('/quiz', {
-                state: {
-                  playerName,
-                  currentLevel,
-                  docId: userDocId
+          const q = query(collection(db, 'users'), where('userId', '==', userDocId))
+          getDocs(q)
+            .then(function(querySnapshot) {
+              if (!querySnapshot.empty) {
+                const userDoc = querySnapshot.docs[0]
+                const userData = userDoc.data()
+                const currentLevel = userData.currentLevel
+                const continueFromLevel = window.confirm(`Your last saved level is ${currentLevel}. Do you want to continue from there?`)
+                if (continueFromLevel) {
+                  navigate('/quiz', {
+                    state: {
+                      playerName,
+                      currentLevel,
+                      docId: userDocId
+                    }
+                  })
+                } else {
+                  navigate('/type-selection', {
+                    state: {
+                      playerName,
+                      currentLevel: 0,
+                      docId: userDocId
+                    }
+                  })
                 }
-              })
-            } else {
-              navigate('/type-selection', {
-                state: {
-                  playerName,
-                  currentLevel: 0,
-                  docId: userDocId
-                }
-              })
-            }
-          } else {
-            navigate('/type-selection', {
-              state: {
-                playerName,
-                currentLevel: 0,
-                docId: userDocId
+              } else {
+                navigate('/type-selection', {
+                  state: {
+                    playerName,
+                    currentLevel: 0,
+                    docId: userDocId
+                  }
+                })
               }
             })
-          }
         }
       })
-      .catch(function () {
+      .catch(function() {
         setErrorMessage('Invalid username or password.')
       })
-      .finally(function () {
+      .finally(function() {
         setLoading(false)
       })
   }
@@ -78,14 +77,14 @@ export default function LoginPage() {
         type="email"
         placeholder="Email"
         value={playerName}
-        onChange={function (e) { setPlayerName(e.target.value) }}
+        onChange={function(e) { setPlayerName(e.target.value) }}
         disabled={loading}
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
-        onChange={function (e) { setPassword(e.target.value) }}
+        onChange={function(e) { setPassword(e.target.value) }}
         disabled={loading}
       />
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}

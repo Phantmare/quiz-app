@@ -10,38 +10,31 @@ export default function QuizPage() {
   const questions = location.state?.questions || []
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [feedback, setFeedback] = useState('')
-  const currentLevel = location.state?.currentLevel || 0
   const docId = location.state?.docId
 
   function handleAnswerSubmit(answer) {
     const currentQuestion = questions[currentQuestionIndex]
-
     if (answer === currentQuestion.correct_answer) {
       setFeedback('Correct!')
     } else {
       setFeedback(`Wrong! The correct answer was: ${currentQuestion.correct_answer}`)
     }
 
-    setTimeout(function () {
+    setTimeout(function() {
       setFeedback('')
+      const newLevel = currentQuestionIndex + 1
+      const userDocRef = doc(db, 'users', docId)
+      updateDoc(userDocRef, { currentLevel: newLevel })
+
       if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1)
       } else {
-        const newLevel = currentLevel + 1
-        const userDocRef = doc(db, 'quiz-app-data', docId)
-
-        updateDoc(userDocRef, {
-          currentLevel: newLevel
-        }).then(function () {
-          navigate('/type-selection', {
-            state: {
-              playerName,
-              currentLevel: newLevel,
-              docId: docId
-            }
-          })
-        }).catch(function (error) {
-          console.error("Error updating level in Firestore:", error)
+        navigate('/type-selection', {
+          state: {
+            playerName,
+            currentLevel: newLevel,
+            docId
+          }
         })
       }
     }, 2000)
@@ -62,19 +55,16 @@ export default function QuizPage() {
 
   const currentQuestion = questions[currentQuestionIndex]
   const answers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]
-
-  const shuffledAnswers = answers.sort(function () {
-    return Math.random() - 0.5
-  })
+  const shuffledAnswers = answers.sort(function() { return Math.random() - 0.5 })
 
   return (
     <div>
       <h1>Question {currentQuestionIndex + 1} of {questions.length}</h1>
       <h2>{currentQuestion.question}</h2>
       <div>
-        {shuffledAnswers.map(function (answer, index) {
+        {shuffledAnswers.map(function(answer, index) {
           return (
-            <button key={index} onClick={function () { handleAnswerSubmit(answer)}}>
+            <button key={index} onClick={function() { handleAnswerSubmit(answer) }}>
               {answer}
             </button>
           )
