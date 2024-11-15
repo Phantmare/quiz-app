@@ -50,8 +50,6 @@ export default function LoginPage() {
                     }
                   })
                 }
-              } else {
-                setErrorMessage('User document not found.')
               }
             })
         }

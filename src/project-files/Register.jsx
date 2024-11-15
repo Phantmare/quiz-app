@@ -29,7 +29,6 @@ export default function RegisterPage() {
       const user = userCredential.user
       const userRef = doc(db, 'users', playerName)
 
-      // Check if user document already exists
       getDoc(userRef).then((docSnap) => {
         if (docSnap.exists()) {
           setErrorMessage('User already exists with this player name.')
