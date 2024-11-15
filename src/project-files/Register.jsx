@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../config/firebaseConfig'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc } from 'firebase/firestore'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
@@ -29,20 +29,28 @@ export default function RegisterPage() {
       const user = userCredential.user
       const userRef = doc(db, 'users', playerName)
 
-      setDoc(userRef, {
-        currentQuizType: '',
-        currentLevel: 1,
-        playerName: playerName,
-        email: email,
-        userId: user.uid
-      }).then(function() {
-        navigate('/type-selection', {
-          state: {
-            playerName: playerName,
+      // Check if user document already exists
+      getDoc(userRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          setErrorMessage('User already exists with this player name.')
+          setLoading(false)
+        } else {
+          setDoc(userRef, {
+            currentQuizType: '',
             currentLevel: 1,
-            docId: userRef.id
-          }
-        })
+            playerName: playerName,
+            email: email,
+            userId: user.uid
+          }).then(function() {
+            navigate('/type-selection', {
+              state: {
+                playerName: playerName,
+                currentLevel: 1,
+                docId: userRef.id
+              }
+            })
+          })
+        }
       })
     }).catch(function() {
       setErrorMessage('Error during registration. Please try again.')
@@ -79,4 +87,3 @@ export default function RegisterPage() {
     </div>
   )
 }
-

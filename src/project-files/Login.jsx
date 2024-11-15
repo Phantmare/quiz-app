@@ -51,13 +51,7 @@ export default function LoginPage() {
                   })
                 }
               } else {
-                navigate('/type-selection', {
-                  state: {
-                    playerName,
-                    currentLevel: 0,
-                    docId: userDocId
-                  }
-                })
+                setErrorMessage('User document not found.')
               }
             })
         }
