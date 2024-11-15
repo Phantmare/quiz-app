@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import '../css/style.css'
-import EnteringPage from './entering-page'
+import EnteringPage from './Login'
 import TypeSelectionPage from './TypeSelectionPage'
 import QuizPage from './QuizPage'
 import RegisterPage from './Register'
