@@ -32,13 +32,15 @@ export default function LoginPage() {
                 const userDoc = querySnapshot.docs[0]
                 const userData = userDoc.data()
                 const currentLevel = userData.currentLevel
+                const currentQuizType = userData.currentQuizType
                 const continueFromLevel = window.confirm(`Your last saved level is ${currentLevel}. Do you want to continue from there?`)
                 if (continueFromLevel) {
                   navigate('/quiz', {
                     state: {
                       playerName,
                       currentLevel,
-                      docId: userDocId
+                      docId: userDocId,
+                      currentQuizType
                     }
                   })
                 } else {

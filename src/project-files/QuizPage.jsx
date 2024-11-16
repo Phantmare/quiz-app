@@ -1,16 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { doc, updateDoc } from 'firebase/firestore'
+import { collection, doc, updateDoc, getDocs, where, query } from 'firebase/firestore'
 import { db } from '../config/firebaseConfig'
 
 export default function QuizPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  const playerName = location.state?.playerName || 'Player'
-  const questions = location.state?.questions || []
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [feedback, setFeedback] = useState('')
+
+  const playerName = location.state?.playerName
+  const currentLevel = location.state?.currentLevel
   const docId = location.state?.docId
+  const currentQuizType = location.state?.currentQuizType
+  const initialQuestions = location.state?.questions || []
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [questions, setQuestions] = useState(initialQuestions) 
+  const [feedback, setFeedback] = useState('')
+
+  useEffect(() => {
+    if (currentLevel && currentQuizType) {
+      continueFromLevel()
+    }
+  })  
+
+  function continueFromLevel() {
+    if (currentLevel && currentQuizType) {
+      const usersCollectionRef = collection(db, 'users')
+      const userQuery = query(usersCollectionRef, where('userId', '==', docId))
+
+      getDocs(userQuery)
+        .then(function(querySnapshot) {
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0]
+            console.log('User Document:', userDoc.id, userDoc.data())
+
+            const playersPrevQuestionsRef = collection(db, 'users', userDoc.id, 'quiz-questions')
+
+            const quizQuery = query(playersPrevQuestionsRef, where('category', '==', currentQuizType))
+
+            getDocs(quizQuery)
+              .then(function(subCollectionSnapshot) {
+                if (!subCollectionSnapshot.empty) {
+                  const fetchedQuestions = []
+                  subCollectionSnapshot.forEach(function(doc) {
+                    const questionData = doc.data()
+                    console.log('Quiz Data:', questionData)
+                    fetchedQuestions.push(questionData)  
+                  })
+                  setQuestions(fetchedQuestions) 
+                  setCurrentQuestionIndex(0) 
+                  setFeedback('')  
+                } else {
+                  console.log('No quiz document found for this category and level.')
+                }
+              })
+              .catch(function(error) {
+                console.error('Error fetching quiz document:', error)
+              })
+          } else {
+            console.log('No user found with the given ID.')
+          }
+        })
+        .catch(function(error) {
+          console.error('Error fetching user:', error)
+        })
+    }
+  }
 
   function handleAnswerSubmit(answer) {
     const currentQuestion = questions[currentQuestionIndex]
@@ -74,4 +129,3 @@ export default function QuizPage() {
     </div>
   )
 }
-

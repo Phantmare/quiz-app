@@ -40,7 +40,7 @@ export default function TypeSelectionPage() {
         }
 
         const userQuizCollection = collection(db, 'users', userDocId, 'quiz-questions')
-        const categoryDocId = `${categoryName}-questions`
+        const categoryDocId = `${categoryName}`
 
         const docRef = doc(userQuizCollection, categoryDocId)
         setDoc(docRef, quizData).then(function() {
