@@ -1,0 +1,52 @@
+[debug] [2024-11-16T12:14:42.409Z] ----------------------------------------------------------------------
+[debug] [2024-11-16T12:14:42.411Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kuzey\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2024-11-16T12:14:42.412Z] CLI Version:   13.23.1
+[debug] [2024-11-16T12:14:42.412Z] Platform:      win32
+[debug] [2024-11-16T12:14:42.412Z] Node Version:  v20.16.0
+[debug] [2024-11-16T12:14:42.412Z] Time:          Sat Nov 16 2024 15:14:42 GMT+0300 (GMT+03:00)
+[debug] [2024-11-16T12:14:42.412Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-16T12:14:42.505Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-16T12:14:42.505Z] > authorizing via signed-in user (kuzey.tasgan@gmail.com)
+[info] i  emulators: Starting emulators: hosting {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: hosting"}}
+[warn] !  hub: emulator hub unable to start on port 4400, starting on 4401 instead. {"metadata":{"emulator":{"name":"hub"},"message":"emulator hub unable to start on port 4400, starting on 4401 instead."}}
+[warn] !  logging: Logging Emulator unable to start on port 4500, starting on 4501 instead. {"metadata":{"emulator":{"name":"logging"},"message":"Logging Emulator unable to start on port 4500, starting on 4501 instead."}}
+[debug] [2024-11-16T12:14:42.513Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[warn] !  hosting: Hosting Emulator unable to start on port 5000, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5000, starting on 5002 instead."}}
+[debug] [2024-11-16T12:14:42.514Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-11-16T12:14:42.514Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4401},{"address":"::1","family":"IPv6","port":4401}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4501}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-11-16T12:14:42.518Z] [hub] writing locator at C:\Users\kuzey\AppData\Local\Temp\hub-quiz-app-22f5a.json
+[debug] [2024-11-16T12:14:42.534Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:42.535Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:42.536Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/quiz-app-22f5a/sites 
+[debug] [2024-11-16T12:14:44.028Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/quiz-app-22f5a/sites 200
+[debug] [2024-11-16T12:14:44.028Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/quiz-app-22f5a/sites {"sites":[{"name":"projects/quiz-app-22f5a/sites/quiz-app-22f5a","defaultUrl":"https://quiz-app-22f5a.web.app","appId":"1:581366630216:web:286e046b589c47f29a557d","type":"DEFAULT_SITE"}]}
+[debug] [2024-11-16T12:14:44.028Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:44.028Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:44.028Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a/webApps/1:581366630216:web:286e046b589c47f29a557d/config [none]
+[debug] [2024-11-16T12:14:44.762Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a/webApps/1:581366630216:web:286e046b589c47f29a557d/config 200
+[debug] [2024-11-16T12:14:44.762Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a/webApps/1:581366630216:web:286e046b589c47f29a557d/config {"projectId":"quiz-app-22f5a","appId":"1:581366630216:web:286e046b589c47f29a557d","databaseURL":"https://quiz-app-22f5a-default-rtdb.europe-west1.firebasedatabase.app","storageBucket":"quiz-app-22f5a.firebasestorage.app","apiKey":"AIzaSyCC55cfj_U4JvWH0xW2klNw2Nfb8g_GEfk","authDomain":"quiz-app-22f5a.firebaseapp.com","messagingSenderId":"581366630216","measurementId":"G-HLBYVS5NH6"}
+[debug] [2024-11-16T12:14:44.767Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:44.767Z] Checked if tokens are valid: true, expires at: 1731762855075
+[debug] [2024-11-16T12:14:44.767Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a [none]
+[debug] [2024-11-16T12:14:45.041Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a 200
+[debug] [2024-11-16T12:14:45.041Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/quiz-app-22f5a {"projectId":"quiz-app-22f5a","projectNumber":"581366630216","displayName":"quiz app","name":"projects/quiz-app-22f5a","resources":{"hostingSite":"quiz-app-22f5a","realtimeDatabaseInstance":"quiz-app-22f5a-default-rtdb"},"state":"ACTIVE","etag":"1_b05ecc1d-08e2-4a0b-91b8-4cb189ffcfa3"}
+[info] i  hosting[quiz-app-22f5a]: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting[quiz-app-22f5a]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[warn] !  emulators: The Emulator UI is not starting, either because none of the running emulators have a UI component or the Emulator UI cannot determine the Project ID. Pass the --project flag to specify a project. {"metadata":{"emulator":{"name":"hub"},"message":"The Emulator UI is not starting, either because none of the running emulators have a UI component or the Emulator UI cannot determine the Project ID. Pass the --project flag to specify a project."}}
+[debug] [2024-11-16T12:14:45.056Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────┬────────────────┐
+│ Emulator │ Host:Port      │
+├──────────┼────────────────┤
+│ Hosting  │ 127.0.0.1:5002 │
+└──────────┴────────────────┘
+  Emulator Hub running at 127.0.0.1:4401
+  Other reserved ports: 4501
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
